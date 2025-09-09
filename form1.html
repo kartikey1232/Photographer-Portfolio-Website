@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Package Form</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border: 2px solid beige;
+            border-radius: 10px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .price-display {
+            font-size: 22px;
+            font-weight: bold;
+            color: gold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: beige;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            border: none;
+        }
+		.pay{
+		text-decoration: none;
+		color: black;
+		}
+        .summary-page {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .summary-box {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            color: white;
+            font-size: 18px;
+        }
+        .summary-item {
+            margin: 5px 0;
+            color: beige;
+        }
+        .summary-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: gold;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function calculatePrice() {
+            let basePrice = 5000;
+        
+            let price = basePrice;
+            
+            let people = document.getElementById('people-count').value;
+            let retouching = document.getElementById('retouching').value;
+            let album = document.getElementById('album').value;
+            
+            if (people === '25-50') price += 1000;
+            else if (people === '50-100') price += 2000;
+            else if (people === '100-200') price += 3000;
+            else if (people === '200-500') price += 5000;     
+            else if (people === '500+') price += 7000;
+            
+            if (retouching === 'yes') price += 3000;
+            if (album === 'yes') price += 7000;
+            
+            
+            document.getElementById('final-price').innerText = `Total Price: ₹${price}`;
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let phonePattern = /^[0-9]{10}$/;
+
+            if (!emailPattern.test(email)) {
+                alert("Invalid Email! Please enter a valid email address.");
+                return false;
+            }
+            if (!phonePattern.test(phone)) {
+                alert("Invalid Phone Number! Please enter a 10-digit phone number.");
+                return false;
+            }
+
+            showSummary();
+            return true;
+        }
+
+        function showSummary() {
+            document.getElementById('booking-form').style.display = 'none';
+            document.getElementById('summary-page').style.display = 'block';
+
+            document.getElementById('summary-email').innerText = document.getElementById('email').value;
+            document.getElementById('summary-phone').innerText = document.getElementById('phone').value;
+            document.getElementById('summary-type').innerText = document.getElementById('photography-type').value;
+            document.getElementById('summary-people').innerText = document.getElementById('people-count').value;
+            document.getElementById('summary-retouching').innerText = document.getElementById('retouching').value;
+            document.getElementById('summary-album').innerText = document.getElementById('album').value;
+            document.getElementById('summary-price').innerText = document.getElementById('final-price').innerText;
+        }
+
+        function goBack() {
+            document.getElementById('summary-page').style.display = 'none';
+            document.getElementById('booking-form').style.display = 'block';
+        }
+
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>📸 Silver Package Booking 📸</h2>
+        <form id="booking-form" onsubmit="return validateForm(event)">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+            
+            <label>📷 Type of Photography</label>
+            <select id="photography-type">
+                <option value="" disabled selected>Select type</option>
+                <option value="wedding">Wedding</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="birthday">Birthday</option>
+                <option value="commercial">Commercial</option>
+                <option value="engagement">Engagement</option>
+                <option value="fashion">Fashion Modelling</option>
+                <option value="family">Family Photo</option>
+            </select>
+            
+            <label>👥 Number of People Attending</label>
+            <select id="people-count" onchange="calculatePrice()">
+                <option value="0-25">0-25</option>
+                <option value="25-50">25-50</option>
+                <option value="50-100">50-100</option>
+                <option value="100-200">100-200</option>
+                <option value="200-500">200-500</option>
+                <option value="500+">500+</option>
+            </select>
+            
+            <label>✨ Retouching & Editing?</label>
+            <select id="retouching" onchange="calculatePrice()">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+            
+            <label>📖 Need an Album? (+₹7000)</label>
+            <select id="album" onchange="calculatePrice()">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <p class="price-display" id="final-price">Total Price: ₹5000</p>
+
+            <div class="btn-container">
+                <button type="submit" class="btn">✅ Confirm Booking</button>
+            </div>
+        </form>
+
+        <div id="summary-page" class="summary-page">
+            <h2>📜 Booking Summary 📜</h2>
+            <div class="summary-box">
+                <p class="summary-item">📧 Email: <span id="summary-email"></span></p>
+                <p class="summary-item">📞 Phone: <span id="summary-phone"></span></p>
+                <p class="summary-item">📸 Type: <span id="summary-type"></span></p>
+                <p class="summary-item">👥 People: <span id="summary-people"></span></p>
+                <p class="summary-item">✨ Retouching: <span id="summary-retouching"></span></p>
+                <p class="summary-item">📖 Album: <span id="summary-album"></span></p>
+                <p class="summary-price" id="summary-price"></p>
+            </div>
+            <button class="btn"><a href= "paynow.html" class="pay">💳 Pay Now</a></button>
+            <button class="btn"><a href= "paylater.html" class="pay">⏳ Pay Later</a></button>
+            <button class="btn" onclick="goBack()">🔄 Change Selections</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Package Form</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border: 2px solid beige;
+            border-radius: 10px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .price-display {
+            font-size: 22px;
+            font-weight: bold;
+            color: gold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: beige;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            border: none;
+        }
+		.pay{
+		text-decoration: none;
+		color: black;
+		}
+        .confirmation {
+            display: none;
+            padding: 20px;
+            border: 2px solid lightgreen;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function calculatePrice() {
+            let basePrice = 15000;
+            let maxPrice = 40000;
+            let price = basePrice;
+            
+            let people = document.getElementById('people-count').value;
+            let drone = document.getElementById('drone').value;
+            let album = document.getElementById('album').value;
+            let reels = document.getElementById('reels').value;
+			
+            if (people === '25-50') price += 1000;
+            else if (people === '50-100') price += 2000;
+            else if (people === '100-200') price += 3000;
+            else if (people === '200-500') price += 5000;
+            else if (people === '500+') price += 7000;
+            
+            if (drone === 'yes') price += 8000;
+            if (album === 'yes') price += 7000;
+            if (reels === 'yes') price += 3000;
+            if (price > maxPrice) price = maxPrice;
+            
+            document.getElementById('final-price').innerText = `Total Price: ₹${price}`;
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let people = document.getElementById('people-count').value;
+            let drone = document.getElementById('drone').value;
+            let album = document.getElementById('album').value;
+            let reels = document.getElementById('reels').value;
+            let serviceTime = document.querySelector('select[name="service-time"]').value;
+            let date = document.getElementById('specific-date').value || "Not Specified";
+            let price = document.getElementById('final-price').innerText;
+
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let phonePattern = /^[0-9]{10}$/;
+
+            if (!emailPattern.test(email)) {
+                alert("Invalid Email! Please enter a valid email address.");
+                return false;
+            }
+            if (!phonePattern.test(phone)) {
+                alert("Invalid Phone Number! Please enter a 10-digit phone number.");
+                return false;
+            }
+
+            // Hide the form, show confirmation page
+            document.getElementById('booking-form').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+
+            // Fill confirmation details
+            document.getElementById('confirm-details').innerHTML = `
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>People Attending:</strong> ${people}</p>
+                <p><strong>Drone Photography:</strong> ${drone}</p>
+                <p><strong>Album Required:</strong> ${album}</p>
+                <p><strong>Reel Shoots:</strong> ${reels}</p>
+                <p><strong>Service Needed:</strong> ${serviceTime}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p class="price-display">${price}</p>
+            `;
+            return true;
+        }
+
+        function editForm() {
+            document.getElementById('confirmation').style.display = 'none';
+            document.getElementById('booking-form').style.display = 'block';
+        }
+
+        window.onload = calculatePrice;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>📸 Gold Package Booking 📸</h2>
+        
+        <form id="booking-form" onsubmit="return validateForm(event)">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+            
+            <label>👥 Number of People Attending</label>
+            <select id="people-count" onchange="calculatePrice()">
+                <option value="" disabled selected>Select number of people</option>
+                <option value="0-25">0-25</option>
+                <option value="25-50">25-50</option>
+                <option value="50-100">50-100</option>
+                <option value="100-200">100-200</option>
+                <option value="200-500">200-500</option>
+                <option value="500+">500+</option>
+            </select>
+            
+            <label>✨ Do you require Drone photography?</label>
+            <select id="drone" onchange="calculatePrice()">
+                <option value="no">No</option>
+                <option value="yes">Yes (+₹8000)</option>
+            </select>
+            
+            <label>📖 Do you need an Album?</label>
+            <select id="album" onchange="calculatePrice()">
+                <option value="no">No</option>
+                <option value="yes">Yes (₹7000)</option>
+            </select>
+            
+            <label>📹 Do you need reel shoots?</label>
+            <select id="reels" onchange="calculatePrice()">
+                <option value="no">No</option>
+                <option value="yes">Yes (₹3000)</option>
+            </select>
+
+            <label>⏳ When do you need the service?</label>
+            <select name="service-time">
+                <option value="this_week">Within This Week</option>
+                <option value="few_weeks">Few Weeks</option>
+                <option value="one_month">1 Month</option>
+                <option value="more_than_month">More than a Month</option>
+                <option value="specific_date">Specific Date</option>
+            </select>
+            
+            <label>📅 If Specific Date, Enter Here</label>
+            <input type="date" id="specific-date">
+            
+            <p class="price-display" id="final-price">Total Price: ₹15000</p>
+            
+            <div class="btn-container">
+                <button type="submit" class="btn">✅ Confirm Booking</button>
+            </div>
+        </form>
+        
+        <div id="confirmation" class="confirmation">
+            <h3>🎉 Booking Confirmed! 🎉</h3>
+            <div id="confirm-details"></div>
+			<button class="btn"><a href= "paynow.html" class="pay">💳 Pay Now</a></button>
+            <button class="btn"><a href= "paylater.html" class="pay">⏳ Pay Later</a></button>
+            <button class="btn" onclick="editForm()">🔙 Edit Details</button>
+        </div>
+    </div>
+</body>
+</html>

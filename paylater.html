@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Later</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .popup-content {
+            background: black;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0px 0px 15px gold;
+        }
+        .input-box {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid gold;
+            background: black;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .error-msg {
+            color: red;
+            display: none;
+            font-size: 14px;
+        }
+        .btn {
+            background: gold;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 150px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="popup-content">
+        <h2>Verify Mobile Number</h2>
+        
+        <input type="text" id="mobileNumber" class="input-box" placeholder="Enter Mobile Number">
+        <p id="numberError" class="error-msg">Invalid Mobile Number</p>
+
+        <button class="btn" onclick="validateMobile()">Send OTP</button>
+    </div>
+
+    <script>
+        function validateMobile() {
+            let number = document.getElementById("mobileNumber").value.trim();
+            let numberError = document.getElementById("numberError");
+
+            // Validate Mobile Number (10-digit Indian format)
+            if (!/^\d{10}$/.test(number)) {
+                numberError.style.display = "block";
+            } else {
+                numberError.style.display = "none";
+                window.location.href = "otp.html";
+            }
+        }
+    </script>
+
+</body>
+</html>

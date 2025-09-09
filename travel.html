@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            text-align: center;
+            color: white;
+            padding-bottom: 50px;
+        }
+
+        h1 {
+            margin: 40px 0;
+            font-size: 42px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #f8f8f8; 
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(60%);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .project-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(80%);
+        }
+
+        .project-item .info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .location {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .quote {
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .project-item:hover .quote {
+            opacity: 1;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <a href="project.html" class="back-home">Back</a>
+    <h1>TRAVEL</h1>
+    <div class="projects">
+        <a href="./travel_dest/tokyo.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHx8fDA%3D" alt="Tokyo">
+            <div class="info">
+                <div class="location">Tokyo</div>
+                <div class="quote">"The city that never sleeps."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/hongkong.html" class="project-item">
+            <img src="https://plus.unsplash.com/premium_photo-1661902124877-f946ba1d3c1e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9uayUyMGtvbmd8ZW58MHx8MHx8fDA%3D" alt="Hong Kong">
+            <div class="info">
+                <div class="location">Hong Kong</div>
+                <div class="quote">"Asia's World City."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/dubai.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1634148551170-d37d021e0cc9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGR1YmFpfGVufDB8fDB8fHww" alt="Dubai">
+            <div class="info">
+                <div class="location">Dubai</div>
+                <div class="quote">"Where the future begins."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/paris.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBhcmlzfGVufDB8fDB8fHww" alt="Paris">
+            <div class="info">
+                <div class="location">Paris</div>
+                <div class="quote">"The city of love."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/newyork.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3JTIweW9ya3xlbnwwfHwwfHx8MA%3D%3D" alt="New York">
+            <div class="info">
+                <div class="location">New York</div>
+                <div class="quote">"The Big Apple."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/london.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bG9uZG9ufGVufDB8fDB8fHww" alt="London">
+            <div class="info">
+                <div class="location">London</div>
+                <div class="quote">"The city of dreams."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/sydney.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1524562865630-b991c6c2f261?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D" alt="Sydney">
+            <div class="info">
+                <div class="location">Sydney</div>
+                <div class="quote">"The Harbour City."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/rome.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9tZXxlbnwwfHwwfHx8MA%3D%3D" alt="Rome">
+            <div class="info">
+                <div class="location">Rome</div>
+                <div class="quote">"All roads lead to Rome."</div>
+            </div>
+        </a>
+    
+        <a href="./travel_dest/barcelona.html" class="project-item">
+            <img src="https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFyY2Vsb25hfGVufDB8fDB8fHww" alt="Barcelona">
+            <div class="info">
+                <div class="location">Barcelona</div>
+                <div class="quote">"Barcelona, the city of Gaudí and dreams."</div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>    
